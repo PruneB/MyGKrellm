@@ -1,0 +1,53 @@
+/*
+** Screen_choice.cpp for screen_choise in /home/GAU_F/Tek/Tek_2/piscine/cpp_rush3_2018/Ncurses/src
+**
+** Made by Makefile
+** Login   <f>
+**
+** Started on  Sat Jan 19 5:29:36 PM 2019 Makefile
+** Last update Sat Jan 19 5:29:36 PM 2019 Makefile
+*/
+
+#include <stdlib.h>
+#include <ncurses.h>
+#include <iostream>
+
+int prout(void)
+{
+    bool graph = false;
+    WINDOW *mid;
+    int interact = 0;
+
+    initscr();
+    mid = subwin(stdscr, LINES / 2, COLS / 2, LINES / 4, COLS / 4);
+    box(mid, ACS_VLINE, ACS_HLINE);
+    keypad(mid, true);
+
+    mvwprintw(mid, LINES / 8, COLS / 5.5, "Quel version voulez-vous?");
+
+    mvwprintw(mid, LINES / 6, COLS / 6, "NCurses");
+
+    mvwprintw(mid, LINES / 6, COLS / 3.5, "SFML");
+
+    while (1)
+    {
+        int c = wgetch(mid);
+        switch (c)
+        {
+        case KEY_LEFT:
+            std::cout << "ncurses";
+            break;
+
+        case KEY_RIGHT:
+            std::cout << "sfml";
+            break;
+        }
+        if (c == KEY_UP || c == KEY_DOWN)
+            break;
+        break;
+    }
+
+    endwin();
+
+    return 0;
+}
